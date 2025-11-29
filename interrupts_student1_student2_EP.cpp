@@ -118,14 +118,17 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
             }
         };
 
-
         for (size_t i = 0; i < wait_queue.size(); ) {
             PCB &p = wait_queue[i];
             if (get_io_remaining(p.PID) == 0) {
                 set_io_remaining(p.PID, p.io_duration);
             }
 
-            unsigned int remaining -= 1;
+            unsigned int remaining get_io_remaining(p.PID);
+            if (remaining > 0) {
+                remaining -= 1;
+            }
+            set_io_remaining(p.PID, remaining);
             if (remaining == 0) {
 
                 PCB finished = p;
@@ -211,7 +214,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
                 running.remaining_time -= 1;
             }
             unsigned int cs = get_cpu_local(running.PID);
-            cs += 1;
+            cs++;
             if (running.io_freq > 0 && cs >= running.io_freq && running.remaining_time > 0) {
                 PCB t = running;
                 t.state = WAITING;
