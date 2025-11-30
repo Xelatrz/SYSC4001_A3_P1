@@ -209,7 +209,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
             }
         }
 
-        if (running != -1) {
+        if (running.PID != -1) {
             if (running.remaining_time > 0) {
                 running.remaining_time -= 1;
             }
