@@ -109,7 +109,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
             }
             cpu_since_io.push_back({pid, v});
         };
-        auto erase_cpu_since = [&](int pid, unsigned int v) {
+        auto erase_cpu_since = [&](int pid) {
             for (size_t i = 0; i < cpu_since_io.size(); ++i) {
                 if (cpu_since_io[i].first == pid) {
                     cpu_since_io.erase(cpu_since_io.begin() + i);
