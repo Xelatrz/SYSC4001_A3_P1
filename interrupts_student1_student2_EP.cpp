@@ -1,6 +1,7 @@
 /**
  * @file interrupts.cpp
  * @author Sasisekhar Govind
+ * @author Taylor Brumwell
  * @brief template main.cpp file for Assignment 3 Part 1 of SYSC4001
  * 
  */
@@ -66,6 +67,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
         static std::vector<std::pair<int, unsigned int>> io_time;
         static std::vector<std::pair<int, unsigned int>> cpu_since_io;
+        int io_ready_pid = -1;
 
         auto get_io_remaining = [&](int pid) -> unsigned int {
             for (auto &p : io_time) {
@@ -120,22 +122,21 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
         for (size_t i = 0; i < wait_queue.size(); ) {
             PCB &p = wait_queue[i];
-            if (get_io_remaining(p.PID) == 0) {
-                set_io_remaining(p.PID, p.io_duration);
-            }
-
             unsigned int remaining = get_io_remaining(p.PID);
+
             if (remaining > 0) {
                 remaining -= 1;
             }
             set_io_remaining(p.PID, remaining);
+            
             if (remaining == 0) {
 
                 PCB finished = p;
                 finished.state = READY;
                 sync_queue(job_list, finished);
                 ready_queue.push_back(finished);
-                execution_status += print_exec_status(current_time, finished.PID, WAITING, READY);
+                io_ready_pid = finished.PID;
+                execution_status += print_exec_status(current_time + 1, finished.PID, WAITING, READY);
 
                 erase_io(finished.PID);
                 erase_cpu_since(finished.PID);
@@ -190,23 +191,26 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
             }
         };
 
-        if (running.PID == -1) {
-            if (!ready_queue.empty()) {
-                size_t best_index = 0;
-                for (size_t i = 1; i < ready_queue.size(); ++i) {
-                    if (ready_queue[i].PID < ready_queue[best_index].PID) {
-                        best_index = i;
-                    }
+        if (running.PID == -1 && !ready_queue.empty()) {
+            size_t best_index = 0;
+            for (size_t i = 1; i < ready_queue.size(); ++i) {
+                if (ready_queue[i].PID < ready_queue[best_index].PID) {
+                    best_index = i;
                 }
-                running = ready_queue[best_index];
-                ready_queue.erase(ready_queue.begin() + best_index);
-                if (running.start_time == -1) {
-                    running.start_time = current_time;
-                }
-                running.state = RUNNING;
-                sync_queue(job_list, running);
-                execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
             }
+            running = ready_queue[best_index];
+            ready_queue.erase(ready_queue.begin() + best_index);
+            if (running.start_time == -1) {
+                running.start_time = current_time;
+            }
+            running.state = RUNNING;
+            sync_queue(job_list, running);
+
+            if (running.PID == io_ready_pid) {
+                current_time++;
+                io_ready_pid -= 1;
+            }
+            execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
         }
 
         if (running.PID != -1) {
@@ -215,6 +219,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
             }
             unsigned int cs = get_cpu_local(running.PID);
             cs++;
+            set_cpu_local(running.PID, cs);
             if (running.io_freq > 0 && cs >= running.io_freq && running.remaining_time > 0) {
                 PCB t = running;
                 t.state = WAITING;
