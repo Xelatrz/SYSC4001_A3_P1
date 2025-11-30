@@ -66,6 +66,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
         static std::vector<std::pair<int, unsigned int>> io_time;
         static std::vector<std::pair<int, unsigned int>> cpu_since_io;
+        int io_ready_pid = -1;
 
         auto get_io_remaining = [&](int pid) -> unsigned int {
             for (auto &p : io_time) {
@@ -129,13 +130,15 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
                 remaining -= 1;
             }
             set_io_remaining(p.PID, remaining);
-            if (remaining == 0) {
 
+            if (remaining == 0) {
+                
                 PCB finished = p;
                 finished.state = READY;
                 sync_queue(job_list, finished);
                 ready_queue.push_back(finished);
-                execution_status += print_exec_status(current_time, finished.PID, WAITING, READY);
+                io_ready_pid = finished.PID;
+                execution_status += print_exec_status(current_time + 1, finished.PID, WAITING, READY);
 
                 erase_io(finished.PID);
                 erase_cpu_since(finished.PID);
@@ -176,6 +179,11 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
                 running.state = RUNNING;
                 quantum_used = 0;
                 sync_queue(job_list, running);
+
+                if (running.PID == io_ready_pid) {
+                    current_time++;
+                    io_ready_pid = -1;
+                }
                 execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
             }
         }
