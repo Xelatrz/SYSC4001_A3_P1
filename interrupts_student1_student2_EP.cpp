@@ -124,7 +124,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
                 set_io_remaining(p.PID, p.io_duration);
             }
 
-            unsigned int remaining get_io_remaining(p.PID);
+            unsigned int remaining = get_io_remaining(p.PID);
             if (remaining > 0) {
                 remaining -= 1;
             }
@@ -162,7 +162,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
         //////////////////////////SCHEDULER//////////////////////////////
         
-        static std::vector<std::pair<int, unsigned int> cpu_since_io_local;
+        static std::vector<std::pair<int, unsigned int>> cpu_since_io_local;
         
         auto get_cpu_local = [&](int pid) -> unsigned int {
             for (auto &pr : cpu_since_io_local) {
@@ -174,7 +174,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
         };
         auto set_cpu_local = [&](int pid, unsigned int v) {
             for (auto &pr : cpu_since_io_local) {
-                if (pi.first == pid) {
+                if (pr.first == pid) {
                     pr.second = v;
                     return;
                 }
@@ -182,18 +182,18 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
             cpu_since_io_local.push_back({pid, v});
         };
         auto erase_cpu_local = [&](int pid) {
-            for (size_t i = 0; i < cpu_since_io_local.size(); ++i) [
+            for (size_t i = 0; i < cpu_since_io_local.size(); ++i) {
                 if (cpu_since_io_local[i].first == pid) {
                     cpu_since_io_local.erase(cpu_since_io_local.begin() + i);
                     return;
                 }
-            ]
+            }
         };
 
         if (running.PID == -1) {
             if (!ready_queue.empty()) {
                 size_t best_index = 0;
-                for (size_t = 1; i < ready_queue.size(); ++i) {
+                for (size_t i = 1; i < ready_queue.size(); ++i) {
                     if (ready_queue[i].PID < ready_queue[best_index].PID) {
                         best_index = i;
                     }
@@ -205,7 +205,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
                 }
                 running.state = RUNNING;
                 sync_queue(job_list, running);
-                execution_status += print_exec_status(currennt_time, running.PID, READY RUNNING);
+                execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
             }
         }
 
@@ -224,7 +224,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
                 idle_CPU(running);
                 erase_cpu_local(t.PID);
             } else if (running.remaining_time == 0) {
-                execution += print_exec_status(current_time + 1, running.PID, RUNNING, TERMINATED);
+                execution_status += print_exec_status(current_time + 1, running.PID, RUNNING, TERMINATED);
                 terminate_process(running, job_list);
                 running = PCB();
                 idle_CPU(running);
