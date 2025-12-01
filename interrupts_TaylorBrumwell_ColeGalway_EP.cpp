@@ -1,11 +1,12 @@
 /**
  * @file interrupts.cpp
  * @author Sasisekhar Govind
+ * @author Taylor Brumwell
  * @brief template main.cpp file for Assignment 3 Part 1 of SYSC4001
  * 
  */
 
-#include<interrupts_student1_student2.hpp>
+#include<interrupts_TaylorBrumwell_ColeGalway.hpp>
 
 void FCFS(std::vector<PCB> &ready_queue) {
     std::sort( 
@@ -121,18 +122,15 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
         for (size_t i = 0; i < wait_queue.size(); ) {
             PCB &p = wait_queue[i];
-            if (get_io_remaining(p.PID) == 0) {
-                set_io_remaining(p.PID, p.io_duration);
-            }
-
             unsigned int remaining = get_io_remaining(p.PID);
+
             if (remaining > 0) {
                 remaining -= 1;
             }
             set_io_remaining(p.PID, remaining);
-
+            
             if (remaining == 0) {
-                
+
                 PCB finished = p;
                 finished.state = READY;
                 sync_queue(job_list, finished);
@@ -165,67 +163,63 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
         //////////////////////////SCHEDULER//////////////////////////////
         
-        const unsigned int QUANTUM = 100;
-        static unsigned int quantum_used = 0;
-
-        if (running.PID == -1) {
-            if (!ready_queue.empty()) {
-                PCB next = ready_queue.front();
-                ready_queue.erase(ready_queue.begin());
-                running = next;
-                if (running.start_time == -1) {
-                    running.start_time = current_time;
+        static std::vector<std::pair<int, unsigned int>> cpu_since_io_local;
+        
+        auto get_cpu_local = [&](int pid) -> unsigned int {
+            for (auto &pr : cpu_since_io_local) {
+                if (pr.first == pid) {
+                    return pr.second;
                 }
-                running.state = RUNNING;
-                quantum_used = 0;
-                sync_queue(job_list, running);
-
-                if (running.PID == io_ready_pid) {
-                    current_time++;
-                    io_ready_pid = -1;
-                }
-                execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
             }
+            return 0;
+        };
+        auto set_cpu_local = [&](int pid, unsigned int v) {
+            for (auto &pr : cpu_since_io_local) {
+                if (pr.first == pid) {
+                    pr.second = v;
+                    return;
+                }
+            }
+            cpu_since_io_local.push_back({pid, v});
+        };
+        auto erase_cpu_local = [&](int pid) {
+            for (size_t i = 0; i < cpu_since_io_local.size(); ++i) {
+                if (cpu_since_io_local[i].first == pid) {
+                    cpu_since_io_local.erase(cpu_since_io_local.begin() + i);
+                    return;
+                }
+            }
+        };
+
+        if (running.PID == -1 && !ready_queue.empty()) {
+            size_t best_index = 0;
+            for (size_t i = 1; i < ready_queue.size(); ++i) {
+                if (ready_queue[i].PID < ready_queue[best_index].PID) {
+                    best_index = i;
+                }
+            }
+            running = ready_queue[best_index];
+            ready_queue.erase(ready_queue.begin() + best_index);
+            if (running.start_time == -1) {
+                running.start_time = current_time;
+            }
+            running.state = RUNNING;
+            sync_queue(job_list, running);
+
+            if (running.PID == io_ready_pid) {
+                current_time++;
+                io_ready_pid -= 1;
+            }
+            execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
         }
 
         if (running.PID != -1) {
             if (running.remaining_time > 0) {
                 running.remaining_time -= 1;
             }
-            quantum_used++;
-
-            static std::vector<std::pair<int, unsigned int>> cpu_since_io_local;
-            
-            auto get_cpu_local = [&](int pid) -> unsigned int {
-                for (auto &pr : cpu_since_io_local) {
-                    if (pr.first == pid) {
-                        return pr.second;
-                    }
-                }
-                return 0;
-            };
-            auto set_cpu_local = [&](int pid, unsigned int v) {
-                for (auto &pr : cpu_since_io_local) {
-                    if (pr.first == pid) {
-                        pr.second = v;
-                        return;
-                    }
-                }
-                cpu_since_io_local.push_back({pid, v});
-            };
-            auto erase_cpu_local = [&](int pid) {
-                for (size_t i = 0; i < cpu_since_io_local.size(); ++i) {
-                    if (cpu_since_io_local[i].first == pid) {
-                        cpu_since_io_local.erase(cpu_since_io_local.begin() + i);
-                        return;
-                    }
-                }
-            };
-
             unsigned int cs = get_cpu_local(running.PID);
             cs++;
             set_cpu_local(running.PID, cs);
-
             if (running.io_freq > 0 && cs >= running.io_freq && running.remaining_time > 0) {
                 PCB t = running;
                 t.state = WAITING;
@@ -233,24 +227,13 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
                 execution_status += print_exec_status(current_time + 1, t.PID, RUNNING, WAITING);
                 running = PCB();
                 idle_CPU(running);
-                quantum_used = 0;
                 erase_cpu_local(t.PID);
             } else if (running.remaining_time == 0) {
                 execution_status += print_exec_status(current_time + 1, running.PID, RUNNING, TERMINATED);
                 terminate_process(running, job_list);
-                unsigned int pid_cleanup = running.PID;
                 running = PCB();
                 idle_CPU(running);
-                quantum_used = 0;
                 erase_cpu_local(running.PID);
-            } else if (quantum_used >= QUANTUM) {
-                running.state = READY;
-                sync_queue(job_list, running);
-                ready_queue.push_back(running);
-                execution_status += print_exec_status(current_time + 1, running.PID, RUNNING, READY);
-                running = PCB();
-                idle_CPU(running);
-                quantum_used = 0;
             } else {
                 sync_queue(job_list, running);
             }
