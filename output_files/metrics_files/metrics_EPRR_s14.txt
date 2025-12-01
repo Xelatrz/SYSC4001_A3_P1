@@ -1,0 +1,16 @@
+=== RESULTS ===
+
+PID 150: arrival=0, start=0, end=300
+   turnaround=300, wait=0, response=0, cpu_time=300
+PID 151: arrival=3, start=300, end=320
+   turnaround=317, wait=297, response=297, cpu_time=20
+PID 152: arrival=6, start=320, end=345
+   turnaround=339, wait=314, response=314, cpu_time=25
+PID 153: arrival=9, start=345, end=595
+   turnaround=586, wait=336, response=336, cpu_time=250
+
+=== SUMMARY ===
+Throughput: 0.0067 process per time unit
+Average Wait Time: 236.75
+Average Turnaround Time: 385.50
+Average Response Time: 236.75

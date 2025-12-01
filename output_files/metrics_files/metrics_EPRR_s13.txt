@@ -1,0 +1,10 @@
+=== RESULTS ===
+
+PID 120: arrival=0, start=0, end=100
+   turnaround=100, wait=0, response=0, cpu_time=100
+
+=== SUMMARY ===
+Throughput: 0.0100 process per time unit
+Average Wait Time: 0.00
+Average Turnaround Time: 100.00
+Average Response Time: 0.00

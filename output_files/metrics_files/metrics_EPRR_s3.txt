@@ -1,0 +1,14 @@
+=== RESULTS ===
+
+PID 30: arrival=0, start=0, end=30
+   turnaround=30, wait=0, response=0, cpu_time=30
+PID 31: arrival=0, start=30, end=60
+   turnaround=60, wait=30, response=30, cpu_time=30
+PID 32: arrival=1, start=60, end=90
+   turnaround=89, wait=59, response=59, cpu_time=30
+
+=== SUMMARY ===
+Throughput: 0.0333 process per time unit
+Average Wait Time: 29.67
+Average Turnaround Time: 59.67
+Average Response Time: 29.67

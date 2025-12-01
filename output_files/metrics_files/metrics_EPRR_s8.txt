@@ -1,0 +1,12 @@
+=== RESULTS ===
+
+PID 70: arrival=0, start=0, end=212
+   turnaround=212, wait=12, response=0, cpu_time=200
+PID 71: arrival=10, start=50, end=563
+   turnaround=553, wait=190, response=40, cpu_time=363
+
+=== SUMMARY ===
+Throughput: 0.0036 process per time unit
+Average Wait Time: 101.00
+Average Turnaround Time: 382.50
+Average Response Time: 20.00

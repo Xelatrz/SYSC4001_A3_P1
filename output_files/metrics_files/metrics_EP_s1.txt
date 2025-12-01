@@ -1,0 +1,18 @@
+=== RESULTS ===
+
+PID 10: arrival=0, start=0, end=59
+   turnaround=59, wait=9, response=0, cpu_time=50
+PID 11: arrival=0, start=59, end=112
+   turnaround=112, wait=67, response=59, cpu_time=45
+PID 12: arrival=1, start=112, end=183
+   turnaround=182, wait=122, response=111, cpu_time=60
+PID 13: arrival=2, start=183, end=230
+   turnaround=228, wait=188, response=181, cpu_time=40
+PID 14: arrival=3, start=230, end=295
+   turnaround=292, wait=237, response=227, cpu_time=55
+
+=== SUMMARY ===
+Throughput: 0.0169 process per time unit
+Average Wait Time: 124.60
+Average Turnaround Time: 174.60
+Average Response Time: 115.60

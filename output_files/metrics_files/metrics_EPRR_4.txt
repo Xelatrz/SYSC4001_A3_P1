@@ -1,0 +1,12 @@
+=== RESULTS ===
+
+PID 1: arrival=3, start=3, end=8
+   turnaround=5, wait=0, response=0, cpu_time=5
+PID 10: arrival=0, start=0, end=13
+   turnaround=13, wait=8, response=0, cpu_time=5
+
+=== SUMMARY ===
+Throughput: 0.1538 process per time unit
+Average Wait Time: 4.00
+Average Turnaround Time: 9.00
+Average Response Time: 0.00

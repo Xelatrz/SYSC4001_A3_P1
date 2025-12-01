@@ -1,0 +1,28 @@
+=== RESULTS ===
+
+PID 110: arrival=0, start=0, end=40
+   turnaround=40, wait=0, response=0, cpu_time=40
+PID 111: arrival=0, start=40, end=90
+   turnaround=90, wait=40, response=40, cpu_time=50
+PID 112: arrival=0, start=90, end=120
+   turnaround=120, wait=90, response=90, cpu_time=30
+PID 113: arrival=0, start=120, end=229
+   turnaround=229, wait=129, response=120, cpu_time=100
+PID 114: arrival=0, start=130, end=340
+   turnaround=340, wait=220, response=130, cpu_time=120
+PID 115: arrival=0, start=340, end=420
+   turnaround=420, wait=340, response=340, cpu_time=80
+PID 116: arrival=0, start=420, end=450
+   turnaround=450, wait=420, response=420, cpu_time=30
+PID 117: arrival=0, start=450, end=475
+   turnaround=475, wait=450, response=450, cpu_time=25
+PID 118: arrival=0, start=475, end=495
+   turnaround=495, wait=475, response=475, cpu_time=20
+PID 119: arrival=0, start=495, end=555
+   turnaround=555, wait=495, response=495, cpu_time=60
+
+=== SUMMARY ===
+Throughput: 0.0180 process per time unit
+Average Wait Time: 265.90
+Average Turnaround Time: 321.40
+Average Response Time: 256.00
