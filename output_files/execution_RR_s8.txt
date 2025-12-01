@@ -1,0 +1,38 @@
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 | 70 |       NEW |     READY |
+|                 0 | 70 |     READY |   RUNNING |
+|                 5 | 71 |       NEW |     READY |
+|                10 | 71 |       NEW |     READY |
+|                50 | 70 |   RUNNING |   WAITING |
+|                50 | 71 |     READY |   RUNNING |
+|                55 | 70 |   WAITING |     READY |
+|                95 | 71 |   RUNNING |   WAITING |
+|                95 | 71 |     READY |   RUNNING |
+|               100 | 71 |   WAITING |     READY |
+|               155 | 71 |   RUNNING |   WAITING |
+|               155 | 70 |     READY |   RUNNING |
+|               159 | 71 |   WAITING |     READY |
+|               205 | 70 |   RUNNING |   WAITING |
+|               205 | 71 |     READY |   RUNNING |
+|               210 | 70 |   WAITING |     READY |
+|               250 | 71 |   RUNNING |   WAITING |
+|               250 | 71 |     READY |   RUNNING |
+|               255 | 71 |   WAITING |     READY |
+|               310 | 71 |   RUNNING |   WAITING |
+|               310 | 70 |     READY |   RUNNING |
+|               314 | 71 |   WAITING |     READY |
+|               360 | 70 |   RUNNING |   WAITING |
+|               360 | 71 |     READY |   RUNNING |
+|               365 | 70 |   WAITING |     READY |
+|               405 | 71 |   RUNNING |   WAITING |
+|               405 | 71 |     READY |   RUNNING |
+|               410 | 71 |   WAITING |     READY |
+|               465 | 71 |   RUNNING |   WAITING |
+|               465 | 70 |     READY |   RUNNING |
+|               469 | 71 |   WAITING |     READY |
+|               515 | 70 |   RUNNING |TERMINATED |
+|               515 | 71 |     READY |   RUNNING |
+|               560 | 71 |   RUNNING |TERMINATED |
++------------------------------------------------+

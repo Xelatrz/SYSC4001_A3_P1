@@ -1,0 +1,123 @@
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 |110 |       NEW |     READY |
+|                 0 |111 |       NEW |     READY |
+|                 0 |112 |       NEW |     READY |
+|                 0 |113 |       NEW |     READY |
+|                 0 |114 |       NEW |     READY |
+|                 0 |115 |       NEW |     READY |
+|                 0 |116 |       NEW |     READY |
+|                 0 |117 |       NEW |     READY |
+|                 0 |118 |       NEW |     READY |
+|                 0 |119 |       NEW |     READY |
+|                 0 |110 |     READY |   RUNNING |
+|                40 |110 |   RUNNING |TERMINATED |
+|                40 |111 |     READY |   RUNNING |
+|                90 |111 |   RUNNING |TERMINATED |
+|                90 |112 |     READY |   RUNNING |
+|                95 |112 |   RUNNING |   WAITING |
+|                96 |112 |   WAITING |     READY |
+|                95 |112 |     READY |   RUNNING |
+|               100 |112 |   RUNNING |   WAITING |
+|               101 |112 |   WAITING |     READY |
+|               100 |112 |     READY |   RUNNING |
+|               105 |112 |   RUNNING |   WAITING |
+|               106 |112 |   WAITING |     READY |
+|               105 |112 |     READY |   RUNNING |
+|               110 |112 |   RUNNING |   WAITING |
+|               111 |112 |   WAITING |     READY |
+|               110 |112 |     READY |   RUNNING |
+|               115 |112 |   RUNNING |   WAITING |
+|               116 |112 |   WAITING |     READY |
+|               115 |112 |     READY |   RUNNING |
+|               120 |112 |   RUNNING |TERMINATED |
+|               120 |113 |     READY |   RUNNING |
+|               130 |113 |   RUNNING |   WAITING |
+|               130 |114 |     READY |   RUNNING |
+|               132 |113 |   WAITING |     READY |
+|               131 |114 |   RUNNING |     READY |
+|               131 |113 |     READY |   RUNNING |
+|               141 |113 |   RUNNING |   WAITING |
+|               141 |114 |     READY |   RUNNING |
+|               143 |113 |   WAITING |     READY |
+|               142 |114 |   RUNNING |     READY |
+|               142 |113 |     READY |   RUNNING |
+|               152 |113 |   RUNNING |   WAITING |
+|               152 |114 |     READY |   RUNNING |
+|               154 |113 |   WAITING |     READY |
+|               153 |114 |   RUNNING |     READY |
+|               153 |113 |     READY |   RUNNING |
+|               163 |113 |   RUNNING |   WAITING |
+|               163 |114 |     READY |   RUNNING |
+|               165 |113 |   WAITING |     READY |
+|               164 |114 |   RUNNING |     READY |
+|               164 |113 |     READY |   RUNNING |
+|               174 |113 |   RUNNING |   WAITING |
+|               174 |114 |     READY |   RUNNING |
+|               176 |113 |   WAITING |     READY |
+|               175 |114 |   RUNNING |     READY |
+|               175 |113 |     READY |   RUNNING |
+|               185 |113 |   RUNNING |   WAITING |
+|               185 |114 |     READY |   RUNNING |
+|               187 |113 |   WAITING |     READY |
+|               186 |114 |   RUNNING |     READY |
+|               186 |113 |     READY |   RUNNING |
+|               196 |113 |   RUNNING |   WAITING |
+|               196 |114 |     READY |   RUNNING |
+|               198 |113 |   WAITING |     READY |
+|               197 |114 |   RUNNING |     READY |
+|               197 |113 |     READY |   RUNNING |
+|               207 |113 |   RUNNING |   WAITING |
+|               207 |114 |     READY |   RUNNING |
+|               209 |113 |   WAITING |     READY |
+|               208 |114 |   RUNNING |     READY |
+|               208 |113 |     READY |   RUNNING |
+|               218 |113 |   RUNNING |   WAITING |
+|               218 |114 |     READY |   RUNNING |
+|               220 |113 |   WAITING |     READY |
+|               219 |114 |   RUNNING |     READY |
+|               219 |113 |     READY |   RUNNING |
+|               229 |113 |   RUNNING |TERMINATED |
+|               229 |114 |     READY |   RUNNING |
+|               329 |114 |   RUNNING |     READY |
+|               329 |114 |     READY |   RUNNING |
+|               340 |114 |   RUNNING |TERMINATED |
+|               340 |115 |     READY |   RUNNING |
+|               420 |115 |   RUNNING |TERMINATED |
+|               420 |116 |     READY |   RUNNING |
+|               450 |116 |   RUNNING |TERMINATED |
+|               450 |117 |     READY |   RUNNING |
+|               475 |117 |   RUNNING |TERMINATED |
+|               475 |118 |     READY |   RUNNING |
+|               495 |118 |   RUNNING |TERMINATED |
+|               495 |119 |     READY |   RUNNING |
+|               501 |119 |   RUNNING |   WAITING |
+|               502 |119 |   WAITING |     READY |
+|               501 |119 |     READY |   RUNNING |
+|               507 |119 |   RUNNING |   WAITING |
+|               508 |119 |   WAITING |     READY |
+|               507 |119 |     READY |   RUNNING |
+|               513 |119 |   RUNNING |   WAITING |
+|               514 |119 |   WAITING |     READY |
+|               513 |119 |     READY |   RUNNING |
+|               519 |119 |   RUNNING |   WAITING |
+|               520 |119 |   WAITING |     READY |
+|               519 |119 |     READY |   RUNNING |
+|               525 |119 |   RUNNING |   WAITING |
+|               526 |119 |   WAITING |     READY |
+|               525 |119 |     READY |   RUNNING |
+|               531 |119 |   RUNNING |   WAITING |
+|               532 |119 |   WAITING |     READY |
+|               531 |119 |     READY |   RUNNING |
+|               537 |119 |   RUNNING |   WAITING |
+|               538 |119 |   WAITING |     READY |
+|               537 |119 |     READY |   RUNNING |
+|               543 |119 |   RUNNING |   WAITING |
+|               544 |119 |   WAITING |     READY |
+|               543 |119 |     READY |   RUNNING |
+|               549 |119 |   RUNNING |   WAITING |
+|               550 |119 |   WAITING |     READY |
+|               549 |119 |     READY |   RUNNING |
+|               555 |119 |   RUNNING |TERMINATED |
++------------------------------------------------+

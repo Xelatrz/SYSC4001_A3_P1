@@ -1,0 +1,44 @@
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 | 70 |       NEW |     READY |
+|                 0 | 70 |     READY |   RUNNING |
+|                 5 | 71 |       NEW |     READY |
+|                10 | 71 |       NEW |     READY |
+|                50 | 70 |   RUNNING |   WAITING |
+|                50 | 71 |     READY |   RUNNING |
+|                55 | 70 |   WAITING |     READY |
+|                54 | 71 |   RUNNING |     READY |
+|                54 | 70 |     READY |   RUNNING |
+|               104 | 70 |   RUNNING |   WAITING |
+|               104 | 71 |     READY |   RUNNING |
+|               109 | 70 |   WAITING |     READY |
+|               108 | 71 |   RUNNING |     READY |
+|               108 | 70 |     READY |   RUNNING |
+|               158 | 70 |   RUNNING |   WAITING |
+|               158 | 71 |     READY |   RUNNING |
+|               163 | 70 |   WAITING |     READY |
+|               162 | 71 |   RUNNING |     READY |
+|               162 | 70 |     READY |   RUNNING |
+|               212 | 70 |   RUNNING |TERMINATED |
+|               212 | 71 |     READY |   RUNNING |
+|               260 | 71 |   RUNNING |   WAITING |
+|               260 | 71 |     READY |   RUNNING |
+|               264 | 71 |   WAITING |     READY |
+|               305 | 71 |   RUNNING |   WAITING |
+|               305 | 71 |     READY |   RUNNING |
+|               310 | 71 |   WAITING |     READY |
+|               365 | 71 |   RUNNING |   WAITING |
+|               365 | 71 |     READY |   RUNNING |
+|               369 | 71 |   WAITING |     READY |
+|               410 | 71 |   RUNNING |   WAITING |
+|               410 | 71 |     READY |   RUNNING |
+|               415 | 71 |   WAITING |     READY |
+|               470 | 71 |   RUNNING |   WAITING |
+|               470 | 71 |     READY |   RUNNING |
+|               474 | 71 |   WAITING |     READY |
+|               515 | 71 |   RUNNING |   WAITING |
+|               515 | 71 |     READY |   RUNNING |
+|               520 | 71 |   WAITING |     READY |
+|               563 | 71 |   RUNNING |TERMINATED |
++------------------------------------------------+
